@@ -73,6 +73,8 @@
     <script src="https://kit.fontawesome.com/79cdef1336.js"></script>
 </head>
 <body>
+
+  
     <nav class="navbar navbar-dark bg-primary">
         <span class="navbar-brand mb-0 h1"></i>Inventario de Medicamentos</span>
     </nav>
@@ -128,6 +130,7 @@
                         <th class="th-sm" onclick="sortTable(6)">Región</th>
                         <th class="th-sm" onclick="sortTable(7)">Ciudad</th>
                         <th class="th-sm" onclick="sortTable(8)">Comuna</th>
+                        <th class="th-sm"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -164,6 +167,9 @@
                                 <td>'.$row[4].'</td>
                                 <td>'.$row[5].'</td>
                                 <td>'.$row[6].'</td>
+                                <td>
+                                <button onclick="AgregarLista()">Agregar a la lista</button>
+                                </td>
                                 </tr>' ;
                             }
 
@@ -183,6 +189,9 @@
                                 <td>'.$row[4].'</td>
                                 <td>'.$row[5].'</td>
                                 <td>'.$row[6].'</td>
+                                <td>
+                                <button onclick="AgregarLista()">Agregar a la lista</button>
+                                </td>
                                 </tr>' ;
                             }
 
@@ -202,6 +211,9 @@
                                 <td>'.$row[4].'</td>
                                 <td>'.$row[5].'</td>
                                 <td>'.$row[6].'</td>
+                                <td>
+                                <button onclick="AgregarLista()">Agregar a la lista</button>
+                                </td>
                                 </tr>' ;
                             } 
                         ?>
@@ -299,6 +311,11 @@
                   }
                 }
               </script>
+              <script>
+              function AgregarLista() {
+                document.write(5 + 6);
+              }
+              </script> 
             </div>
         </div>
     </div>
