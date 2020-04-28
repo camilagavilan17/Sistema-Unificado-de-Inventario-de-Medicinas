@@ -116,18 +116,18 @@
     <div class="container"> <br> <br>
         <div class="card margen-card"> 
             <div class="card-body"> 
-                <table class="table"> 
+                <table id="myTable2" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%"> 
                     <thead>
                         <tr>
-                        <th scope="col">Nombre Medicamento</th>
-                        <th scope="col">Precio Medicamento</th>
-                        <th scope="col">Presentación Medicamento</th>
-                        <th scope="col">Franquicia</th>
-                        <th scope="col">Dirección</th>
-                        <th scope="col">Teléfono</th>
-                        <th scope="col">Región</th>
-                        <th scope="col">Cuidad</th>
-                        <th scope="col">Comuna</th>
+                        <th class="th-sm" onclick="sortTable2()">Precio Medicamento</th>
+                        <th class="th-sm" onclick="sortTable(1)">Nombre Medicamento</th>
+                        <th class="th-sm" onclick="sortTable(2)">Presentación Medicamento</th>
+                        <th class="th-sm" onclick="sortTable(3)">Franquicia</th>
+                        <th class="th-sm" onclick="sortTable(4)">Dirección</th>
+                        <th class="th-sm">Teléfono</th>
+                        <th class="th-sm" onclick="sortTable(6)">Región</th>
+                        <th class="th-sm" onclick="sortTable(7)">Ciudad</th>
+                        <th class="th-sm" onclick="sortTable(8)">Comuna</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -155,8 +155,8 @@
                             }
                             while($row = pg_fetch_row($ret)) {
                                 echo '<tr>
-                                <th scope="row">'.$row[8].'</th>
                                 <td>'.$row[9].'</td>
+                                <td>'.$row[8].'</td>
                                 <td>'.$row[10].'</td>
                                 <td>'.$row[1].'</td>
                                 <td>'.$row[2].'</td>
@@ -174,8 +174,8 @@
                             }
                             while($row = pg_fetch_row($ret)) {
                                 echo '<tr>
-                                <th scope="row">'.$row[8].'</th>
                                 <td>'.$row[9].'</td>
+                                <td>'.$row[8].'</td>
                                 <td>'.$row[10].'</td>
                                 <td>'.$row[1].'</td>
                                 <td>'.$row[2].'</td>
@@ -193,8 +193,8 @@
                             }
                             while($row = pg_fetch_row($ret)) {
                                 echo '<tr>
-                                <th scope="row">'.$row[8].'</th>
                                 <td>'.$row[9].'</td>
+                                <td>'.$row[8].'</td>
                                 <td>'.$row[10].'</td>
                                 <td>'.$row[1].'</td>
                                 <td>'.$row[2].'</td>
@@ -207,6 +207,98 @@
                         ?>
                     </tbody>
                 </table>
+              <script>
+                  function sortTable(n) {
+                    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+                    table = document.getElementById("myTable2");
+                    switching = true;
+                    // Set the sorting direction to ascending:
+                    dir = "asc";
+                    /* Make a loop that will continue until
+                    no switching has been done: */
+                    while (switching) {
+                      // Start by saying: no switching is done:
+                      switching = false;
+                      rows = table.rows;
+                      /* Loop through all table rows (except the
+                      first, which contains table headers): */
+                      for (i = 1; i < (rows.length - 1); i++) {
+                        // Start by saying there should be no switching:
+                        shouldSwitch = false;
+                        /* Get the two elements you want to compare,
+                        one from current row and one from the next: */
+                        x = rows[i].getElementsByTagName("TD")[n];
+                        y = rows[i + 1].getElementsByTagName("TD")[n];
+                        /* Check if the two rows should switch place,
+                        based on the direction, asc or desc: */
+                        if (dir == "asc") {
+                          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            // If so, mark as a switch and break the loop:
+                            shouldSwitch = true;
+                            break;
+                          }
+                        } else if (dir == "desc") {
+                          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                            // If so, mark as a switch and break the loop:
+                            shouldSwitch = true;
+                            break;
+                          }
+                        }
+                      }
+                      if (shouldSwitch) {
+                        /* If a switch has been marked, make the switch
+                        and mark that a switch has been done: */
+                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                        switching = true;
+                        // Each time a switch is done, increase this count by 1:
+                        switchcount ++;
+                      } else {
+                        /* If no switching has been done AND the direction is "asc",
+                        set the direction to "desc" and run the while loop again. */
+                        if (switchcount == 0 && dir == "asc") {
+                          dir = "desc";
+                          switching = true;
+                        }
+                      }
+                    }
+                  }
+                </script>
+                <script>
+                function sortTable2() {
+                  var table, rows, switching, i, x, y, shouldSwitch;
+                  table = document.getElementById("myTable2");
+                  switching = true;
+                  /*Make a loop that will continue until
+                  no switching has been done:*/
+                  while (switching) {
+                    //start by saying: no switching is done:
+                    switching = false;
+                    rows = table.rows;
+                    /*Loop through all table rows (except the
+                    first, which contains table headers):*/
+                    for (i = 1; i < (rows.length - 1); i++) {
+                      //start by saying there should be no switching:
+                      shouldSwitch = false;
+                      /*Get the two elements you want to compare,
+                      one from current row and one from the next:*/
+                      x = rows[i].getElementsByTagName("TD")[0];
+                      y = rows[i + 1].getElementsByTagName("TD")[0];
+                      //check if the two rows should switch place:
+                      if (Number(x.innerHTML) > Number(y.innerHTML)) {
+                        //if so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                      }
+                    }
+                    if (shouldSwitch) {
+                      /*If a switch has been marked, make the switch
+                      and mark that a switch has been done:*/
+                      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                      switching = true;
+                    }
+                  }
+                }
+              </script>
             </div>
         </div>
     </div>
